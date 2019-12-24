@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/splash"
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:textSize="17dp"
+        android:paddingTop="222dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="우리가 만드는 방과후 학교"
+        />
+
+    <TextView
+        android:textSize="30dp"
+        android:paddingTop="10dp"
+        android:textColor="#2cc68f"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="우리스쿨"
+        />
+
+
+</LinearLayout>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/button_parent_arrow_left"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/arrow_left"
+        android:layout_marginTop="17dp"
+        android:layout_marginLeft="17dp"/>
+
+
+    <TextView
+        android:textSize="30dp"
+        android:layout_gravity="center"
+        android:paddingTop="10dp"
+        android:textColor="#2cc68f"
+        android:textStyle="bold"
+        android:layout_width="314dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="106dp"
+        android:text="우리스쿨"/>
+
+    <TextView
+        android:layout_width="314dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:layout_gravity="center"
+        android:text="안녕하세요 학부모님\n반갑습니다"
+        android:textSize="21dp"/>
+
+    <LinearLayout
+        android:layout_marginTop="69dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="314dp"
+        android:layout_height="47dp"
+        android:background="@drawable/stroke">
+
+        <EditText
+            android:id="@+id/parent_phone"
+            android:paddingLeft="14dp"
+            android:layout_gravity="center"
+            android:layout_width="240dp"
+            android:layout_height="47dp"
+            android:background="@null"
+
+            android:hint="휴대폰 번호 (-없이 입력)"
+            android:textSize="14dp"
+            android:inputType="number"
+            android:maxLength="11" />
+
+        <Button
+            android:id="@+id/auth_button"
+            android:layout_gravity="center"
+            android:background="@drawable/auth_button"
+            android:layout_width="69dp"
+            android:layout_height="33dp"
+            android:text="인증하기"
+            android:textSize="12dp"
+            />
+    </LinearLayout>
+
+    <EditText
+        android:paddingLeft="14dp"
+        android:layout_gravity="center"
+        android:layout_width="314dp"
+        android:layout_height="47dp"
+        android:background="@drawable/stroke"
+
+        android:hint=" 인증번호 4자리"
+        android:textSize="14dp"
+        android:inputType="number"
+        android:maxLength="4"
+        />
+
+    <TextView
+        android:drawableLeft="@drawable/phone"
+        android:layout_marginTop="86dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 문의센터 02 1234 1234 (평일 9시 - 18시 공휴일 제외)"
+        android:textSize="13dp"
+        android:textColor="#9b9b9b"/>
+    <Button
+        android:id="@+id/login_button"
+        android:layout_marginTop="9dp"
+        android:layout_gravity="center"
+        android:layout_width="306dp"
+        android:layout_height="47dp"
+        android:text="로그인"
+        android:textColor="#FFFFFF"
+        android:textSize="17dp"
+        android:background="@drawable/login_button">
+
+    </Button>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:paddingTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Copyright Worrischool Corp. All rights Reserved"
+            android:textColor="#9b9b9b"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+</LinearLayout>
