@@ -65,6 +65,7 @@
     </LinearLayout>
 
     <EditText
+        android:id="@+id/phone_auth_num"
         android:paddingLeft="14dp"
         android:layout_gravity="center"
         android:layout_width="314dp"

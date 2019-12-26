@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.apiconnectiontest.SecondActivity"></activity>
-        <activity android:name="com.example.apiconnectiontest.ParentActivity"></activity>
+        <activity android:name=".SecondActivity"></activity>
+        <activity android:name=".ParentActivity"></activity>
+        <activity android:name=".LoginParentInfoActivity"></activity>
     </application>
 </manifest>
