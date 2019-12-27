@@ -15,13 +15,11 @@ class ConnectServer : AppCompatActivity(){
 
     companion object {
 
-
-
+        //기본주소
     val BASE_URL = "http://ec2-52-78-148-252.ap-northeast-2.compute.amazonaws.com/"
 
 
     fun postRequestPhoneAuth(parent_phone_num: String) {
-
         val client = OkHttpClient()
 
         val requestBody = FormBody.Builder()
@@ -37,8 +35,7 @@ class ConnectServer : AppCompatActivity(){
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                println("왜안되지?")
-
+                println("인증번호발송 실패")
             }
 
             @Throws(IOException::class)
@@ -59,6 +56,7 @@ class ConnectServer : AppCompatActivity(){
     }
 
 
+
     fun postRequestLogin(phone_num: String, phone_auth_num: String, handler: JsonResponseHandler) {
 
         val client = OkHttpClient()
@@ -74,7 +72,7 @@ class ConnectServer : AppCompatActivity(){
         //작성한 Request Body와 데이터를 보낼 url을 Request에 붙임
         //작성한 Request Body와 데이터를 보낼 url을 Request에 붙임
         val request: Request = Request.Builder()
-            .url("http://ec2-52-78-148-252.ap-northeast-2.compute.amazonaws.com/phone_auth_num_check")
+            .url("${BASE_URL}phone_auth_num_check")
             .post(requestBody)
             .build()
 
