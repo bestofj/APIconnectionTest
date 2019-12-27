@@ -8,10 +8,10 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.beanfactory.woorischool.datas.School
 import java.util.*
-import com.example.apiconnectiontest.LoginParentInfoActivity
+import com.example.apiconnectiontest.R
 
 class SchoolSpinnerAdapter(context: Context, spinnerData: List<School>) : BaseAdapter() {
-    private val context: Context? = null
+    private var context: Context? = null
     private var spinnerData: List<School> = ArrayList<School>()
 
     private val inflater: LayoutInflater
@@ -32,22 +32,18 @@ class SchoolSpinnerAdapter(context: Context, spinnerData: List<School>) : BaseAd
         return 0
     }
 
-    override fun getView(
-        i: Int,
-        convertView: View,
-        viewGroup: ViewGroup
-    ): View {
+    override fun getView(i: Int, convertView: View, viewGroup: ViewGroup): View {
         var convertView = convertView
         val data: School = spinnerData[i]
         convertView = inflater.inflate(R.layout.spinner_selected_item, viewGroup, false)
         val tv =
             convertView.findViewById<View>(R.id.txtvSpinnerItem) as TextView
-        if (data.getId() === -1) {
-            tv.setTextColor(context!!.resources.getColor(R.color.gray_9b9b9b))
+        if (data.id === -1) {
+            //tv.setTextColor(context!!.resources.getColor(R.color.gray_9b9b9b))
         } else {
-            tv.setTextColor(context!!.resources.getColor(R.color.gray_4a4a4a))
+            //tv.setTextColor(context!!.resources.getColor(R.color.gray_4a4a4a))
         }
-        tv.text = String.format("%s", data.getName())
+        tv.text = String.format("%s", data.name)
         return convertView
     }
 
@@ -63,12 +59,12 @@ class SchoolSpinnerAdapter(context: Context, spinnerData: List<School>) : BaseAd
         }
         val tv =
             convertView.findViewById<View>(R.id.txtvSpinnerItem) as TextView
-        if (data.getId() === -1) {
-            tv.setTextColor(context!!.resources.getColor(R.color.gray_9b9b9b))
+        if (data.id === -1) {
+            //tv.setTextColor(context!!.resources.getColor(R.color.gray_9b9b9b))
         } else {
-            tv.setTextColor(context!!.resources.getColor(R.color.gray_4a4a4a))
+            //tv.setTextColor(context!!.resources.getColor(R.color.gray_4a4a4a))
         }
-        tv.text = String.format("%s", data.getName())
+        tv.text = String.format("%s", data.name)
         return convertView
     }
 
