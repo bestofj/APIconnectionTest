@@ -2,6 +2,7 @@ package com.example.apiconnectiontest
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.beanfactory.woorischool.adapters.SchoolSpinnerAdapter
@@ -35,9 +36,9 @@ class LoginParentInfoActivity : BaseActivity() {
             ConnectServer.getRequestSchoolList(mContext, "", object : ConnectServer.JsonResponseHandler {
                     override fun onResponse(json: JSONObject) {
                         try {
-                            if (json!!.getInt("code") == 200) {
-                                val school =
-                                    json.getJSONObject("data").getJSONArray("school")
+                            if (json.getInt("code") == 200) {
+                                Log.d("log",json.toString())
+                                val school = json.getJSONObject("data").getJSONArray("school")
                                 list.clear()
                                 val first = School()
                                 first.id = -1
@@ -64,7 +65,7 @@ class LoginParentInfoActivity : BaseActivity() {
 
         }//get schoolList
 
-        //getSchoolList()
+        getSchoolList()
 
 
 
@@ -80,7 +81,7 @@ class LoginParentInfoActivity : BaseActivity() {
                 grade.getText().toString(), devision.getText().toString(), class_num.getText().toString(), object: ConnectServer.JsonResponseHandler{
                     override fun onResponse(json: JSONObject) {
                         try {
-                            if (json!!.getInt("code") == 200) {
+                            if (json.getInt("code") == 200) {
                                 runOnUiThread {
                                     val intent =
                                         Intent(mContext, ParentActivity::class.java) //연습

@@ -21,8 +21,7 @@ class User : Serializable {
 
     companion object {
         fun getUserFromJson(json: JSONObject): User {
-            val user =
-                User()
+            val user = User()
             try {
                 user.id = json.getInt("id")
                 user.type = json.getString("type")

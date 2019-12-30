@@ -19,17 +19,17 @@ class ConnectServer{
     val BASE_URL = "http://ec2-52-78-148-252.ap-northeast-2.compute.amazonaws.com/"
 
 
-    fun postRequestPhoneAuth(context: Context, parent_phone_num: String, handler:JsonResponseHandler) {
+    fun postRequestPhoneAuth(context: Context, parent_phone_num: String, device_token:String?, handler:JsonResponseHandler) {
         val client = OkHttpClient()
 
         val requestBody = FormBody.Builder()
             .add("phone_num", parent_phone_num)
-            .add("device_token", "1")
+            .add("device_token", device_token)
             .add("os", "iOS")
             .build()
 
         val request = Request.Builder()
-            //.header("X-Http-Token", ContextUtils.getUserToken(context))
+            .header("X-Http-Token", ContextUtils.getUserToken(context))
             .url("${BASE_URL}phone_auth")
             .post(requestBody)
             .build()

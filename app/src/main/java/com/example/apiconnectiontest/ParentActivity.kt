@@ -2,11 +2,13 @@ package com.example.apiconnectiontest
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import com.example.apiconnectiontest.datas.User
 import com.example.apiconnectiontest.util.ConnectServer
 import com.example.apiconnectiontest.util.ContextUtils
+import com.google.firebase.iid.FirebaseInstanceId
 
 import kotlinx.android.synthetic.main.activity_parent.*
 import org.json.JSONException
@@ -24,31 +26,41 @@ class ParentActivity : BaseActivity() {
             startActivity(myIntent)
         }
 
-
-
         //인증번호 발송
         auth_button.setOnClickListener {
-            val parent_phone_num = parent_phone.text.toString() //입력 전화번호
-            ConnectServer.postRequestPhoneAuth(mContext,parent_phone_num, object: ConnectServer.JsonResponseHandler{
-                override fun onResponse(json: JSONObject) {
-                }
-            })
-            /*
-            client.newCall(request).enqueue(object: Callback{
-                override fun onFailure(call: Call, e: IOException) {
-                    println("API connection: fail")
-                    //Toast.makeText(mContext, "인증번호 발송에 실패했습니다.", Toast.LENGTH_SHORT).show()
-                }
 
-                override fun onResponse(call: Call, response: Response) {
-                    println("API connection: OK")
-                    //Toast.makeText(mContext, "인증번호가 발송되었습니다.", Toast.LENGTH_SHORT).show()
+            val parent_phone_num = parent_phone.text.toString()
 
-                }
+            //firebase device token check
+            val device_token: String? = FirebaseInstanceId.getInstance().token
+            Log.d("log", FirebaseInstanceId.getInstance().token)
 
-            })
-            */
+
+            if (TextUtils.isEmpty(device_token)) {
+                Log.d("token", "token is empty")
+                //val intent = Intent(mContext, FCMIDService::class.java)
+                //startService(intent)
+            }
+            ConnectServer.postRequestPhoneAuth(mContext, parent_phone_num, device_token, object : ConnectServer.JsonResponseHandler {
+                    override fun onResponse(json: JSONObject) {
+                        try {
+                            if (json.getInt("code") == 200) {
+                                runOnUiThread {
+                                    Toast.makeText(mContext, "인증번호가 발송되었습니다.", Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                val message = json.getString("message")
+                                runOnUiThread {
+                                    Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+                    }
+                })
         }
+
 
         //인증번호와 대조
         login_button.setOnClickListener{
@@ -61,16 +73,17 @@ class ParentActivity : BaseActivity() {
                     override fun onResponse(json: JSONObject) {
                         try {
                             if (json.getInt("code") == 200) {
-                                Log.d("log", json.toString())
+
                                 val token = json.getJSONObject("data").getString("token")
                                 ContextUtils.setUserToken(mContext, token)
-                                val user: User = User.getUserFromJson(json.getJSONObject("data").getJSONObject("user"))
 
+                                val user: User = User.getUserFromJson(json.getJSONObject("data").getJSONObject("user"))
                                 ContextUtils.setLoginUser(mContext, user)
-                                //GlobalData.loginUser = user ***************************************************************
+
+                                //GlobalData.loginUser = user 이게뭐노?
                                 runOnUiThread {
                                     var intent: Intent? = null
-                                    if (user.child != null) {
+                                    if (user.child == null) {////다시바꿔주기
                                         intent = Intent(mContext, SecondActivity::class.java)//연습
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                                         startActivity(intent)
@@ -96,9 +109,6 @@ class ParentActivity : BaseActivity() {
                     }
                 })
         }
-
-
-
 
 
     }

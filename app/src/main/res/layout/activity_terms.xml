@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="17dp"
+        android:paddingTop="17dp">
+
+        <ImageView
+            android:id="@+id/button_terms_arrow_left"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            app:srcCompat="@drawable/arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="우리스쿨 서비스 이용 동의"
+            android:textStyle="bold"
+            android:textSize="17dp"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="326dp"
+            android:layout_height="38dp"
+            android:text="전체동의는 필수 및 선택정보에 대한 동의도 포함되어 있으며,개별적으로도 동의를 선택할 수 있습니다."
+            android:textSize="13dp" />
+
+        <TextView
+            android:layout_width="326dp"
+            android:layout_height="38dp"
+            android:text="선택항목에 대한 동의를 거부하는 경우에도 서비스 이용이 가능합니다"
+            android:textSize="13dp" />
+
+        <view
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="18dp"
+            android:background="@color/gray_e0e0e0"/>
+
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/agree"
+            android:layout_width="306dp"
+            android:layout_height="47dp"
+            android:layout_marginBottom="63dp"
+            android:background="@drawable/login_button"
+            android:text="동의하기"
+            android:textColor="#FFFFFF"
+            android:textSize="17dp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
