@@ -16,8 +16,7 @@ class User : Serializable {
     var attendance: String? = null
     var child: User? = null
     var studentInfo: StudentInfo? = null
-    var parent: MutableList<User> =
-        ArrayList()
+    var parent: MutableList<User> = ArrayList()
 
     companion object {
         fun getUserFromJson(json: JSONObject): User {

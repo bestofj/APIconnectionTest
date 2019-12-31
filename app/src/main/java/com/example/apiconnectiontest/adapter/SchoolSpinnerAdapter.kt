@@ -1,18 +1,17 @@
-package com.beanfactory.woorischool.adapters
-
+package com.example.apiconnectiontest.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.beanfactory.woorischool.datas.School
-import java.util.*
 import com.example.apiconnectiontest.R
+import com.example.apiconnectiontest.datas.School
+import java.util.*
 
 class SchoolSpinnerAdapter(context: Context, spinnerData: List<School>) : BaseAdapter() {
     private var context: Context? = null
-    private var spinnerData: List<School> = ArrayList<School>()
+    private var spinnerData: List<School> = ArrayList()
 
     private val inflater: LayoutInflater
 
@@ -32,33 +31,33 @@ class SchoolSpinnerAdapter(context: Context, spinnerData: List<School>) : BaseAd
         return 0
     }
 
-    override fun getView(i: Int, convertView: View, viewGroup: ViewGroup): View {
-        var convertView = convertView
-        val data: School = spinnerData[i]
-        convertView = inflater.inflate(R.layout.spinner_selected_item, viewGroup, false)
-        val tv =
-            convertView.findViewById<View>(R.id.txtvSpinnerItem) as TextView
-        if (data.id === -1) {
-            //tv.setTextColor(context!!.resources.getColor(R.color.gray_9b9b9b))
+    override fun getView(i :Int, convertView :View?, viewGroup:ViewGroup?): View? {
+        val data = spinnerData.get(i)
+
+        var convertView = inflater.inflate(R.layout.spinner_selected_item, viewGroup, false)
+        var tv:TextView = convertView.findViewById(R.id.txtvSpinnerItem) as TextView
+        if (data.GetId() == -1) {
+            //tv.setTextColor(context.getResources().getColor(R.color.gray_9b9b9b))
         } else {
-            //tv.setTextColor(context!!.resources.getColor(R.color.gray_4a4a4a))
+            //tv.setTextColor(context.getResources().getColor(R.color.gray_4a4a4a))
         }
-        tv.text = String.format("%s", data.name)
+        tv.setText(String.format("%s", data.GetName()))
+
         return convertView
     }
 
+
     override fun getDropDownView(
         position: Int,
-        convertView: View,
-        parent: ViewGroup
-    ): View {
+        convertView: View?,
+        parent: ViewGroup?
+    ): View? {
         var convertView = convertView
         val data: School = spinnerData[position]
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.spinner_dropdown_item, parent, false)
         }
-        val tv =
-            convertView.findViewById<View>(R.id.txtvSpinnerItem) as TextView
+        val tv = convertView?.findViewById<View>(R.id.txtvSpinnerItem) as TextView
         if (data.id === -1) {
             //tv.setTextColor(context!!.resources.getColor(R.color.gray_9b9b9b))
         } else {

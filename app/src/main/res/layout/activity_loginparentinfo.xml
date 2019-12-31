@@ -15,7 +15,7 @@
         android:paddingTop="17dp">
 
         <ImageView
-            android:id="@+id/button_addchild_arrow_left"
+            android:id="@+id/button_parentinfo_arrow_left"
             android:layout_width="18dp"
             android:layout_height="18dp"
             app:srcCompat="@drawable/arrow_left" />
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content">
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spinnerBar"
                 android:layout_width="314dp"
                 android:layout_height="47dp"
                 android:background="@drawable/stroke"/>
