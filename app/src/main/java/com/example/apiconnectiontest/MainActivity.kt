@@ -27,9 +27,7 @@ class MainActivity : BaseActivity() {
         val myDateFormat = SimpleDateFormat("yyyy-MM-dd")
         getParentInfo(myDateFormat.format(Calendar.getInstance().time))
 
-        Handler().postDelayed({
-            startActivity(Intent(this@MainActivity, SecondActivity::class.java))
-        }, 1200)
+        Handler().postDelayed({ startActivity(Intent(this@MainActivity, SecondActivity::class.java)) }, 1200)
 
     }
 
@@ -47,31 +45,19 @@ class MainActivity : BaseActivity() {
                     try {
                         if (json.getInt("code") == 200) {
                             val user: User = User.getUserFromJson(json.getJSONObject("data").getJSONObject("user"))
-                            println("UserCheck")
-                            println(user.id)
-
                             //ContextUtils.setLoginUser(mContext, user)
                             GlobalData.loginUser = user
-                            println("GlobalDataCheck")
-                            println(GlobalData.loginUser?.terms_time.toString())
+
                             runOnUiThread {
-                                var intent: Intent? = null
                                     val message = json.getString("message")
                                     runOnUiThread {
                                         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
-                                        val intent =
-                                            Intent(mContext, SecondActivity::class.java)
-                                        startActivity(intent)
-                                        finish()
                                     }
                             }
                         }
                     } catch (e: JSONException) {
                         e.printStackTrace()
                         runOnUiThread {
-                            val intent = Intent(mContext, SecondActivity::class.java)
-                            startActivity(intent)
-                            finish()
                         }
                     }
                 }

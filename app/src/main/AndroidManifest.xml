@@ -23,5 +23,7 @@
         <activity android:name=".ParentActivity"></activity>
         <activity android:name=".LoginParentInfoActivity"></activity>
         <activity android:name=".TermsActivity"></activity>
+        <activity android:name=".ParentHomeActivity"></activity>
+        <activity android:name=".ParentProfileActivity"></activity>
     </application>
 </manifest>

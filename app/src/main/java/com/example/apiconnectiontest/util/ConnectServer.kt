@@ -18,6 +18,45 @@ class ConnectServer{
         //API기본주소
     val BASE_URL = "http://ec2-52-78-148-252.ap-northeast-2.compute.amazonaws.com/"
 
+
+        fun postRequestProfileLogin(context:Context, name: String?, handler: JsonResponseHandler) {
+            val client = OkHttpClient()
+
+            val requestBody = FormBody.Builder()
+                .add("name", name)
+                //.add("image", image)
+                .build()
+
+            val request = Request.Builder()
+                .header("X-Http-Token", ContextUtils.getUserToken(context).toString())
+                .url("http://ec2-52-78-148-252.ap-northeast-2.compute.amazonaws.com/" + "user_info")
+                .put(requestBody)
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    println("error!!")
+
+                }
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    //                Log.d("aaaa", "Response Body is " + response.body().string());
+                    val body = response.body()!!.string()
+                    Log.d("log", "서버에서 응답한 Body:$body")
+                    try {
+                        val json = JSONObject(body)
+                        if (handler != null)
+                            handler.onResponse(json)
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+
+                }
+            })
+        }
+
+
         fun getRequestParentInfo(context: Context?, date: String?, token: String?, handler: JsonResponseHandler?) {
 //            if (! ConnectServer.checkIntenetSetting(context)) {
 //                return

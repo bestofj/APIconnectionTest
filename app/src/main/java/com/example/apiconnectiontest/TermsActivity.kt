@@ -105,18 +105,20 @@ class TermsActivity :BaseActivity() {
                     try {
                         if (json.getInt("code") == 200) {
                             Log.d("log", ContextUtils.getUserToken(mContext))
+                            var intent: Intent? = null
 
                             runOnUiThread {
                                 if (GlobalData.loginUser?.child == null) {
-                                    var intent: Intent? = null
                                     intent = Intent(mContext, ParentActivity::class.java)
                                     startActivity(intent)
                                 }
                                 else if(GlobalData.loginUser?.profile_image_url == null){
-                                    //프로필 등록
+                                    intent = Intent(mContext, ParentProfileActivity::class.java)
+                                    startActivity(intent)
                                 }
                                 else{
-                                    //학부모 홈으로
+                                    intent = Intent(mContext, ParentHomeActivity::class.java)
+                                    startActivity(intent)
                                 }
                             }
                         } else {

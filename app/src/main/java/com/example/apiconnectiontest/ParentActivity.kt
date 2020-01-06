@@ -82,7 +82,7 @@ class ParentActivity : BaseActivity() {
                                 GlobalData.loginUser = user
                                 runOnUiThread {
                                     var intent: Intent? = null
-                                    if (user.child == null) {
+                                    if (user.terms_time == null) {
                                         intent = Intent(mContext, LoginParentInfoActivity::class.java)
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                                         startActivity(intent)
@@ -92,16 +92,14 @@ class ParentActivity : BaseActivity() {
                                         startActivity(intent)
                                     }
                                     else{
-                                        println("학부모홈으로")
+                                        intent = Intent(mContext, ParentHomeActivity::class.java)
+                                        startActivity(intent)
                                     }
                                 }
                             } else {
                                 val message = json.getString("message")
                                 runOnUiThread {
-                                    Toast.makeText(
-                                        mContext,
-                                        message,
-                                        Toast.LENGTH_SHORT
+                                    Toast.makeText(mContext, message, Toast.LENGTH_SHORT
                                     ).show()
                                 }
                             }
