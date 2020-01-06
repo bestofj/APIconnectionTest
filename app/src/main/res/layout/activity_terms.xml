@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/button_terms_arrow_left"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
             app:srcCompat="@drawable/arrow_left" />
 
         <TextView
@@ -48,18 +48,198 @@
             android:text="선택항목에 대한 동의를 거부하는 경우에도 서비스 이용이 가능합니다"
             android:textSize="13dp" />
 
-        <view
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="18dp"
-            android:background="@color/gray_e0e0e0"/>
+            android:background="@color/gray_e0e0e0"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="20dp"/>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="left">
+
+        <ImageView
+            android:id="@+id/checkAll"
+            android:layout_marginLeft="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ovalunchecked"/>
+        <TextView
+            android:layout_marginLeft="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전체동의"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
 
 
+</LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_e0e0e0"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="left"
+            android:layout_marginLeft="40dp">
+
+            <ImageView
+                android:id="@+id/checkUsage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/unchecked"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_marginLeft="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(필수)"
+                android:textColor="#2cc68f"
+                android:textSize="13dp" />
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이용약관 동의"
+                android:textSize="13dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="11dp"
+                android:src="@drawable/arrow_right"
+                android:layout_marginRight="31dp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_e0e0e0"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="left"
+            android:layout_marginLeft="40dp">
+
+            <ImageView
+                android:id="@+id/checkPrivateInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/unchecked"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_marginLeft="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(필수)"
+                android:textColor="#2cc68f"
+                android:textSize="13dp" />
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="개인정보 취급 방침"
+                android:textSize="13dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="11dp"
+                android:src="@drawable/arrow_right"
+                android:layout_marginRight="31dp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_e0e0e0"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="left"
+            android:layout_marginLeft="40dp">
+
+            <ImageView
+                android:id="@+id/checkPromotion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/unchecked"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_marginLeft="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(선택)"
+                android:textColor="#9b9b9b"
+                android:textSize="13dp"/>
+            <TextView
+                android:layout_marginLeft="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이벤트 등 프로모션 알림 메시지 동의"
+                android:textSize="13dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="11dp"
+                android:src="@drawable/arrow_right"
+                android:layout_marginRight="31dp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
 
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="1dp"
+            android:background="@color/gray_e0e0e0"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <Button
@@ -67,7 +247,7 @@
             android:layout_width="306dp"
             android:layout_height="47dp"
             android:layout_marginBottom="63dp"
-            android:background="@drawable/login_button"
+            android:background="@drawable/nonactivebutton"
             android:text="동의하기"
             android:textColor="#FFFFFF"
             android:textSize="17dp" />

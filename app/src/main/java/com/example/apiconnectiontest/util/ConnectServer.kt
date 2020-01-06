@@ -18,7 +18,41 @@ class ConnectServer{
         //API기본주소
     val BASE_URL = "http://ec2-52-78-148-252.ap-northeast-2.compute.amazonaws.com/"
 
+        fun getRequestParentInfo(context: Context?, date: String?, token: String?, handler: JsonResponseHandler?) {
+//            if (! ConnectServer.checkIntenetSetting(context)) {
+//                return
+//            }
+            val client = OkHttpClient()
+            val urlBuilder =
+                HttpUrl.parse(BASE_URL + "me_info") !!.newBuilder()
+            if (date != "") {
+                urlBuilder.addEncodedQueryParameter("date", date)
+            }
+            urlBuilder.addEncodedQueryParameter("device_token", token)
+            urlBuilder.addEncodedQueryParameter("os", "Android")
+            val requestUrl = urlBuilder.build().toString()
+            val request = Request.Builder()
+                .header("X-Http-Token", ContextUtils.getUserToken(context !!))
+                .url(requestUrl)
+                .build()
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    Log.d("error", "Connect Server Error is $e")
+                }
 
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    val body = response.body() !!.string()
+                    Log.d("log", "서버에서 응답한 Body:$body")
+                    try {
+                        val json = JSONObject(body)
+                        handler?.onResponse(json)
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                }
+            })
+        }
     fun postRequestPhoneAuth(context: Context, parent_phone_num: String, device_token:String?, handler:JsonResponseHandler) {
         val client = OkHttpClient()
 
@@ -84,10 +118,8 @@ class ConnectServer{
             }
 
             @Throws(IOException::class)
-            override fun onResponse(
-                call: Call,
-                response: Response
-            ) { //                Log.d("aaaa", "Response Body is " + response.body().string());
+            override fun onResponse(call: Call, response: Response) {
+                //Log.d("aaaa", "Response Body is " + response.body().string());
                 val body = response.body()?.string()
                 Log.d("log", "서버에서 응답한 Body:$body")
                 try {
@@ -131,9 +163,7 @@ class ConnectServer{
                 }
 
                 @Throws(IOException::class)
-                override fun onResponse(
-                    call: Call,
-                    response: Response
+                override fun onResponse(call: Call, response: Response
                 ) { //                Log.d("aaaa", "Response Body is " + response.body().string());
                     val body = response.body()!!.string()
                     Log.d("log", "서버에서 응답한 Body:$body")
@@ -147,7 +177,7 @@ class ConnectServer{
             })
         }
 
-        fun getRequestSchoolList(context: Context?, name: String?, handler: JsonResponseHandler?) {
+        fun getRequestSchoolList(context: Context, name: String?, handler: JsonResponseHandler?) {
             val client = OkHttpClient()
             val urlBuilder =
                 HttpUrl.parse(BASE_URL + "school")!!.newBuilder()
@@ -155,7 +185,8 @@ class ConnectServer{
             val requestUrl = urlBuilder
                 .build().toString()
             val request =
-                Request.Builder() //                .header("X-Http-Token" , ContextUtils.getUserToken(context))
+                Request.Builder()
+                    .header("X-Http-Token" , ContextUtils.getUserToken(context))
                     .url(requestUrl)
                     .build()
             client.newCall(request).enqueue(object : Callback {
@@ -170,6 +201,43 @@ class ConnectServer{
                     try {
                         val json = JSONObject(body)
                         handler?.onResponse(json)
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                }
+            })
+        }
+
+        fun userService(context: Context, terms: Int, privacy: Int, notify_msg:Int, handler: JsonResponseHandler){
+            val client = OkHttpClient()
+
+            val requestBody: RequestBody = FormBody.Builder()
+                .add("terms", terms.toString())
+                .add("privacy", privacy.toString())
+                .add("notify_msg", notify_msg.toString())
+                .build()
+            //작성한 Request Body와 데이터를 보낼 url을 Request에 붙임
+            val request = Request.Builder()
+                .header("X-Http-Token", ContextUtils.getUserToken(context))
+                .url(BASE_URL + "user_service")
+                .post(requestBody)
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    Log.d("error", "Connect Server Error is $e")
+                }
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    //                Log.d("aaaa", "Response Body is " + response.body().string());
+                    val body = response.body()?.string()
+                    Log.d("log", "서버에서 응답한 Body:$body")
+                    try {
+                        val json = JSONObject(body)
+                        if (handler != null) {
+                            handler.onResponse(json)
+                        }
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }

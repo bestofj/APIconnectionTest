@@ -17,6 +17,7 @@ class ContextUtils {
         private const val USER_TICKET = "USER_TICKET"
         private const val USER_ATTENDANCE = "USER_ATTENDANCE"
         private const val USER_ATTENDANCE_COUNT = "USER_ATTENDANCE_COUNT"
+
         fun getLoginType(context: Context): String? {
             val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
             return pref.getString(LOGIN_TYPE, "")

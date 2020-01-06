@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.example.apiconnectiontest.datas.User
 import com.example.apiconnectiontest.util.ConnectServer
 import com.example.apiconnectiontest.util.ContextUtils
+import com.example.apiconnectiontest.util.GlobalData
 import com.google.firebase.iid.FirebaseInstanceId
 
 import kotlinx.android.synthetic.main.activity_parent.*
@@ -33,8 +34,6 @@ class ParentActivity : BaseActivity() {
 
             //firebase device token check
             val device_token: String? = FirebaseInstanceId.getInstance().token
-            Log.d("log", FirebaseInstanceId.getInstance().token)
-
 
             if (TextUtils.isEmpty(device_token)) {
                 Log.d("token", "token is empty")
@@ -80,17 +79,20 @@ class ParentActivity : BaseActivity() {
                                 val user: User = User.getUserFromJson(json.getJSONObject("data").getJSONObject("user"))
                                 ContextUtils.setLoginUser(mContext, user)
 
-                                //GlobalData.loginUser = user 이게뭐노?
+                                GlobalData.loginUser = user
                                 runOnUiThread {
                                     var intent: Intent? = null
-                                    if (user.child == null) {////다시바꿔주기
-                                        intent = Intent(mContext, SecondActivity::class.java)//연습
+                                    if (user.child == null) {
+                                        intent = Intent(mContext, LoginParentInfoActivity::class.java)
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                                         startActivity(intent)
                                         finish()
-                                    } else {
+                                    } else if (user.child == null){ //자녀데이터 체크
                                         intent = Intent(mContext, LoginParentInfoActivity::class.java)
                                         startActivity(intent)
+                                    }
+                                    else{
+                                        println("학부모홈으로")
                                     }
                                 }
                             } else {

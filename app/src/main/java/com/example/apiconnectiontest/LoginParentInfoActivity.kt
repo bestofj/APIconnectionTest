@@ -54,9 +54,7 @@ class LoginParentInfoActivity : BaseActivity() {
                         e.printStackTrace()
                     }
                 })
-
         }//get schoolList
-
         getSchoolList()
 
 

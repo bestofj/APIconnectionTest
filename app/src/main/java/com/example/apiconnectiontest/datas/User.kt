@@ -17,6 +17,8 @@ class User : Serializable {
     var child: User? = null
     var studentInfo: StudentInfo? = null
     var parent: MutableList<User> = ArrayList()
+    var terms_time :String? = null
+    var profile_image_url: String? = null
 
     companion object {
         fun getUserFromJson(json: JSONObject): User {
@@ -26,14 +28,16 @@ class User : Serializable {
                 user.type = json.getString("type")
                 user.name = json.getString("name")
                 user.phone_num = json.getString("phone_num")
+                user.profile_image_url = json.getString("profile_image_url")
+                user.terms_time = json.getString("terms_time")
+
                 if (! json.isNull("child") && json.getString("child") != "") {
                     user.child = getUserFromJson(
                         json.getJSONObject("child")
                     )
                 }
                 if (! json.isNull("student_info")) {
-                    user.studentInfo =
-                        StudentInfo.getInfoFromJson(json.getJSONObject("student_info"))
+                    user.studentInfo = StudentInfo.getInfoFromJson(json.getJSONObject("student_info"))
                 }
                 user.parent.clear()
                 if (! json.isNull("parents")) {

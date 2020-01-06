@@ -22,5 +22,6 @@
         <activity android:name=".SecondActivity"></activity>
         <activity android:name=".ParentActivity"></activity>
         <activity android:name=".LoginParentInfoActivity"></activity>
+        <activity android:name=".TermsActivity"></activity>
     </application>
 </manifest>

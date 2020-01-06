@@ -37,9 +37,9 @@ class SchoolSpinnerAdapter(context: Context, spinnerData: List<School>) : BaseAd
         var convertView = inflater.inflate(R.layout.spinner_selected_item, viewGroup, false)
         var tv:TextView = convertView.findViewById(R.id.txtvSpinnerItem) as TextView
         if (data.GetId() == -1) {
-            //tv.setTextColor(context.getResources().getColor(R.color.gray_9b9b9b))
+            tv.setTextColor(context?.getResources()!!.getColor(R.color.gray_9b9b9b))
         } else {
-            //tv.setTextColor(context.getResources().getColor(R.color.gray_4a4a4a))
+            tv.setTextColor(context?.getResources()!!.getColor(R.color.gray_4a4a4a))
         }
         tv.setText(String.format("%s", data.GetName()))
 
