@@ -2,24 +2,21 @@ package com.example.apiconnectiontest
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.apiconnectiontest.util.GlobalData
 import kotlinx.android.synthetic.main.activity_loginparentinfo.*
 import kotlinx.android.synthetic.main.activity_parent_home.*
+import kotlinx.android.synthetic.main.activity_parent_my.*
 
-class ParentHomeActivity : BaseActivity() {
+class ParentMyActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_parent_home)
+        setContentView(R.layout.activity_parent_my)
         supportActionBar?.hide()
 
-        var name = GlobalData.loginUser?.child?.name
-        txt_greet.setText(name + " 학부모님\n안녕하세요")
-
-        btnActionBarMy.setOnClickListener {
-            val myIntent = Intent(this, ParentMyActivity::class.java)
-            startActivity(myIntent)
+        editPicBTN.setOnClickListener {
+            var intent = Intent(mContext, ParentProfilePicActivity::class.java)
+            startActivity(intent)
         }
 
     }

@@ -5,6 +5,7 @@ import android.util.Log
 import okhttp3.*
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.File
 import java.io.IOException
 
 
@@ -16,45 +17,55 @@ class ConnectServer{
 
     companion object {
         //API기본주소
-    val BASE_URL = "http://ec2-52-78-148-252.ap-northeast-2.compute.amazonaws.com/"
+        val BASE_URL = "http://ec2-52-78-148-252.ap-northeast-2.compute.amazonaws.com/"
 
 
-        fun postRequestProfileLogin(context:Context, name: String?, handler: JsonResponseHandler) {
-            val client = OkHttpClient()
+        fun putRequestUserInfo(context:Context, name: String?, image: File?, handler: JsonResponseHandler) {
+//                if (!checkIntenetSetting(context)) {
+//                    return;
+//                }
+            val client = OkHttpClient();
 
-            val requestBody = FormBody.Builder()
-                .add("name", name)
-                //.add("image", image)
-                .build()
+            val formBody: MultipartBody.Builder = MultipartBody.Builder()
+            formBody.setType(MultipartBody.FORM)
+            formBody.addFormDataPart("name", name);
+            if (image != null) {
+                formBody.addFormDataPart("image", image.getName(), RequestBody.create(MediaType.parse("image/jpeg"), image))
+            }
 
-            val request = Request.Builder()
-                .header("X-Http-Token", ContextUtils.getUserToken(context).toString())
-                .url("http://ec2-52-78-148-252.ap-northeast-2.compute.amazonaws.com/" + "user_info")
+            val requestBody: RequestBody = formBody.build()
+
+            val request: Request = Request.Builder()
+                .header("X-Http-Token", ContextUtils.getUserToken(context))
+                .url(BASE_URL + "user_info")
                 .put(requestBody)
-                .build()
+                .build();
 
+            //request를 Client에 세팅하고 Server로 부터 온 Response를 처리할 Callback 작성
             client.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    println("error!!")
-
+                    Log.d("error", "Connect Server Error is " + e.toString());
                 }
 
                 @Throws(IOException::class)
                 override fun onResponse(call: Call, response: Response) {
                     //                Log.d("aaaa", "Response Body is " + response.body().string());
-                    val body = response.body()!!.string()
-                    Log.d("log", "서버에서 응답한 Body:$body")
+                    val body: String? = response.body()?.string()
+                    Log.d("log", "서버에서 응답한 Body:" + body)
                     try {
-                        val json = JSONObject(body)
+                        val json: JSONObject = JSONObject(body);
                         if (handler != null)
                             handler.onResponse(json)
                     } catch (e: JSONException) {
-                        e.printStackTrace()
+                        e.printStackTrace();
                     }
 
                 }
             })
         }
+
+
+
 
 
         fun getRequestParentInfo(context: Context?, date: String?, token: String?, handler: JsonResponseHandler?) {
@@ -92,41 +103,41 @@ class ConnectServer{
                 }
             })
         }
-    fun postRequestPhoneAuth(context: Context, parent_phone_num: String, device_token:String?, handler:JsonResponseHandler) {
-        val client = OkHttpClient()
+        fun postRequestPhoneAuth(context: Context, parent_phone_num: String, device_token:String?, handler:JsonResponseHandler) {
+            val client = OkHttpClient()
 
-        val requestBody = FormBody.Builder()
-            .add("phone_num", parent_phone_num)
-            .add("device_token", device_token)
-            .add("os", "iOS")
-            .build()
+            val requestBody = FormBody.Builder()
+                .add("phone_num", parent_phone_num)
+                .add("device_token", device_token)
+                .add("os", "iOS")
+                .build()
 
-        val request = Request.Builder()
-            .header("X-Http-Token", ContextUtils.getUserToken(context))
-            .url("${BASE_URL}phone_auth")
-            .post(requestBody)
-            .build()
+            val request = Request.Builder()
+                .header("X-Http-Token", ContextUtils.getUserToken(context))
+                .url("${BASE_URL}phone_auth")
+                .post(requestBody)
+                .build()
 
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                println("인증번호발송 실패")
-            }
-
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                //                Log.d("aaaa", "Response Body is " + response.body().string());
-                val body = response.body()!!.string()
-                Log.d("log", "서버에서 응답한 Body:$body")
-                try {
-                    val json = JSONObject(body)
-                    if (handler != null) handler.onResponse(json)
-                } catch (e: JSONException) {
-                    e.printStackTrace()
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    println("인증번호발송 실패")
                 }
 
-            }
-        })
-    }
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    //                Log.d("aaaa", "Response Body is " + response.body().string());
+                    val body = response.body()!!.string()
+                    Log.d("log", "서버에서 응답한 Body:$body")
+                    try {
+                        val json = JSONObject(body)
+                        if (handler != null) handler.onResponse(json)
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+
+                }
+            })
+        }
 
 
 
@@ -283,9 +294,6 @@ class ConnectServer{
                 }
             })
         }
-
-
-
 
 
     }//compaion object

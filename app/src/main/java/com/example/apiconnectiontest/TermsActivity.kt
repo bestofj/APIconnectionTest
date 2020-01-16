@@ -1,6 +1,5 @@
 package com.example.apiconnectiontest
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -108,12 +107,12 @@ class TermsActivity :BaseActivity() {
                             var intent: Intent? = null
 
                             runOnUiThread {
-                                if (GlobalData.loginUser?.child == null) {
+                                if (GlobalData.loginUser?.child?.name == "null") {
                                     intent = Intent(mContext, ParentActivity::class.java)
                                     startActivity(intent)
                                 }
-                                else if(GlobalData.loginUser?.profile_image_url == null){
-                                    intent = Intent(mContext, ParentProfileActivity::class.java)
+                                else if(GlobalData.loginUser?.profile_image_url == "null"){
+                                    intent = Intent(mContext, ParentProfilePicActivity::class.java)
                                     startActivity(intent)
                                 }
                                 else{
@@ -147,8 +146,5 @@ class TermsActivity :BaseActivity() {
             goodToAgree = 0
         }
     }
-
-
-
 
 }

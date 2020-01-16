@@ -29,7 +29,7 @@ class SecondActivity : BaseActivity() {
                 startActivity(myIntent)
             }
             else if(GlobalData.loginUser?.profile_image_url == "null"){
-                myIntent = Intent(mContext, ParentProfileActivity::class.java)
+                myIntent = Intent(mContext, ParentProfilePicActivity::class.java)
                 startActivity(myIntent)
             }
             else{
